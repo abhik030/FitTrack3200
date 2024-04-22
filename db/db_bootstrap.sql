@@ -237,6 +237,13 @@ CREATE TABLE Occupancy (
     FOREIGN KEY (Gym_ID) REFERENCES Gym(Gym_ID)
 );
 
+CREATE TABLE Class_Member (
+    Class_ID INT,
+    Member_ID INT,
+    PRIMARY KEY (Class_ID, Member_ID),
+    FOREIGN KEY (Class_ID) REFERENCES Fitness_Class(Class_ID),
+    FOREIGN KEY (Member_ID) REFERENCES Member(Member_ID)
+);
 
 
 
@@ -1704,3 +1711,45 @@ insert into Fitness_Class (Class_ID, Gym_ID, Instructor_ID, Name, Description, F
 insert into Fitness_Class (Class_ID, Gym_ID, Instructor_ID, Name, Description, Focus) values (41, '2', '15', 'Bootcamp', 'Pilates core workout', 'shoulders');
 
 
+INSERT INTO Class_Member (Class_ID, Member_ID)
+VALUES
+    (12, 29),
+    (7, 25),
+    (2, 38),
+    (11, 34),
+    (33, 20),
+    (39, 5),
+    (29, 1),
+    (16, 9),
+    (41, 6),
+    (31, 30),
+    (13, 36),
+    (22, 40),
+    (35, 41),
+    (5, 16),
+    (4, 32),
+    (6, 19),
+    (23, 12),
+    (9, 23),
+    (15, 33),
+    (28, 11),
+    (27, 13),
+    (17, 35),
+    (19, 21),
+    (40, 15),
+    (26, 10),
+    (10, 24),
+    (30, 27),
+    (21, 17),
+    (20, 2),
+    (3, 37),
+    (36, 22),
+    (8, 4),
+    (14, 28),
+    (1, 18),
+    (18, 7),
+    (32, 31),
+    (34, 3),
+    (38, 26),
+    (37, 14),
+    (25, 39);
