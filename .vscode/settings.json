@@ -9,7 +9,7 @@
             "server": "localhost",
             "port": 3200,
             "driver": "MySQL",
-            "name": "fittrack",
+            "name": "FitTrack",
             "database": "fittrack",
             "username": "root",
             "askForPassword": true
