@@ -9,7 +9,7 @@ occupancy = Blueprint('occupancy', __name__)
 @occupancy.route('/occupancy', methods=['GET'])
 def get_occupancy():
     cursor = db.get_db().cursor()
-    cursor.execute('select * from occupancy')
+    cursor.execute('select * from Occupancy')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -24,7 +24,7 @@ def get_occupancy():
 @occupancy.route('/occupancy/<gymID>', methods=['GET'])
 def get_occupancy_by_gym(gymID):
     cursor = db.get_db().cursor()
-    cursor.execute('select * from occupancy where gym_id = {0}'.format(gymID))
+    cursor.execute('select * from Occupancy where gym_id = {0}'.format(gymID))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()

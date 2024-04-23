@@ -10,7 +10,7 @@ attendance = Blueprint('attendance', __name__)
 @attendance.route('/attendance', methods=['GET'])
 def get_attendance():
     cursor = db.get_db().cursor()
-    cursor.execute('select * from attendance')
+    cursor.execute('select * from Attendance')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -25,7 +25,7 @@ def get_attendance():
 @attendance.route('/attendance', methods=['POST'])
 def track_attendance():
     cursor = db.get_db().cursor()
-    cursor.execute('insert into attendance (member_id, gym_id, checkin_time) values (%s, %s, %s)', 
+    cursor.execute('insert into Attendance (member_id, gym_id, checkin_time) values (%s, %s, %s)', 
         (request.json['member_id'], request.json['gym_id'], request.json['checkin_time']))
     db.get_db().commit()
     the_response = make_response(jsonify('Attendance tracked successfully'))
@@ -37,7 +37,7 @@ def track_attendance():
 @attendance.route('/attendance/<attendanceID>', methods=['PUT'])
 def update_attendance(attendanceID):
     cursor = db.get_db().cursor()
-    cursor.execute('update attendance set member_id = %s, gym_id = %s, checkin_time = %s where id = %s', 
+    cursor.execute('update Attendance set member_id = %s, gym_id = %s, checkin_time = %s where id = %s', 
         (request.json['member_id'], request.json['gym_id'], request.json['checkin_time'], attendanceID))
     db.get_db().commit()
     the_response = make_response(jsonify('Attendance updated successfully'))
