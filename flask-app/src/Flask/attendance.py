@@ -32,14 +32,15 @@ def track_attendance():
     the_response.mimetype = 'application/json'
     return the_response
 
-# Updates gym attendance | Not working
-@attendance.route('/attendance/<int:member_id>', methods=['PUT'])
-def update_attendance(member_id):
-    cursor = db.get_db().cursor()
-    cursor.execute('update Attendance set Workout_Freq = %s where Member_ID = %s', 
-        (request.json['workout_freq'], member_id))
-    db.get_db().commit()
-    the_response = make_response(jsonify('Attendance updated successfully'))
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
+# # Updates gym attendance | Not working
+# @attendance.route('/attendance/<int:member_id>', methods=['PUT'])
+# def update_attendance(member_id):
+#     cursor = db.get_db().cursor()
+#     cursor.execute('update Attendance set Workout_Freq = %s where Member_ID = %s', 
+#         (request.json['workout_freq'], member_id))
+#     print(request.json['workout_freq'])
+#     db.get_db().commit()
+#     the_response = make_response(jsonify('Attendance updated successfully'))
+#     the_response.status_code = 200
+#     the_response.mimetype = 'application/json'
+#     return the_response

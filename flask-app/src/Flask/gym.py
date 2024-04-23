@@ -5,7 +5,7 @@ from src import db
 
 gym = Blueprint('gym', __name__)
 
-# Get a list of all available gyms
+# Get a list of all available gyms -> Working
 @gym.route('/gyms', methods=['GET'])
 def get_gyms():
     cursor = db.get_db().cursor()
@@ -20,34 +20,23 @@ def get_gyms():
     the_response.mimetype = 'application/json'
     return the_response
 
-# Add a new gym to the DB
+# Add a new gym to the DB -> Works
 @gym.route('/gyms', methods=['POST'])
 def add_gym():
     cursor = db.get_db().cursor()
-    cursor.execute('insert into Gym (name, address, phone) values (%s, %s, %s)', 
-        (request.json['name'], request.json['address'], request.json['phone']))
+    cursor.execute('insert into Gym (Gym_ID, Name, Address) values (%s, %s, %s)', 
+        (request.json['Gym_ID'], request.json['Name'], request.json['Address']))
     db.get_db().commit()
     the_response = make_response(jsonify('Gym added successfully'))
     the_response.status_code = 201
     the_response.mimetype = 'application/json'
     return the_response
 
-# Delete a gym from the DB
-@gym.route('/gyms/<gymID>', methods=['DELETE'])
-def delete_gym(gymID):
-    cursor = db.get_db().cursor()
-    cursor.execute('delete from Gym where id = {0}'.format(gymID))
-    db.get_db().commit()
-    the_response = make_response(jsonify('Gym deleted successfully'))
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
-
-# Return gym name and address for a specific gym
+# Return gym name and address for a specific gym -> Works
 @gym.route('/gyms/<gymID>', methods=['GET']) 
 def get_gymDetails(gymID):
     cursor = db.get_db().cursor()
-    cursor.execute('select * from Gym where id = {0}'.format(gymID))
+    cursor.execute('select * from Gym where gym_id = {0}'.format(gymID))
     gym = cursor.fetchone()
     if gym is None:
         the_response = make_response(jsonify('Gym not found'))

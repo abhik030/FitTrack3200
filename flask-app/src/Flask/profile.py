@@ -4,7 +4,7 @@ from src import db
 
 profile = Blueprint('profile', __name__)
 
-# Create a new member profile
+# Create a new member profile -> Partially Works (If a member ID is given then a profile can be made)
 @profile.route('/profile', methods=['POST'])
 def create_profile():
     cursor = db.get_db().cursor()
@@ -17,7 +17,7 @@ def create_profile():
     return the_response
 
 
-# Return specific profile details
+# Return specific profile details -> Works
 @profile.route('/profile/<profileID>', methods=['GET'])
 def get_profileDetails(profileID):
     cursor = db.get_db().cursor()
@@ -44,7 +44,7 @@ def get_profileDetails(profileID):
         the_response.mimetype = 'application/json'
         return the_response
 
-# Updating a member profile
+# Updating a member profile -> Works
 @profile.route('/profile/<profileID>', methods=['PUT'])
 def update_profile(profileID):
     cursor = db.get_db().cursor()
@@ -64,7 +64,7 @@ def update_profile(profileID):
         the_response.mimetype = 'application/json'
         return the_response
     
-# Delete a member profile
+# Delete a member profile -> Works
 @profile.route('/profile/<profileID>', methods=['DELETE'])
 def delete_profile(profileID):
     cursor = db.get_db().cursor()
