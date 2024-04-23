@@ -5,7 +5,7 @@ from src import db
 attendance = Blueprint('attendance', __name__)
 
 
-# Returns gym attendance data
+# Returns the gym attendance data 
 @attendance.route('/attendance', methods=['GET'])
 def get_attendance():
     cursor = db.get_db().cursor()

@@ -54,7 +54,7 @@ CREATE TABLE Workout_Plan (
     Focus VARCHAR(50)
 );
 
--- Create Member table
+-- Create Member tables
 CREATE TABLE Member (
     Member_ID INT PRIMARY KEY,
     Plan_ID INT,
@@ -1570,7 +1570,7 @@ insert into Gym_Events (Gym_ID, Event_ID) values ('20', '32');
 insert into Gym_Events (Gym_ID, Event_ID) values ('34', '37');
 insert into Gym_Events (Gym_ID, Event_ID) values ('12', '19');
 insert into Gym_Events (Gym_ID, Event_ID) values ('17', '14');
-insert into Gym_Events (Gym_ID, Event_ID) values ('4', '11');
+insert into Gym_Events (Gym_ID, Event_ID) values ('4', '10');
 insert into Gym_Events (Gym_ID, Event_ID) values ('3', '3');
 insert into Gym_Events (Gym_ID, Event_ID) values ('9', '22');
 insert into Gym_Events (Gym_ID, Event_ID) values ('28', '15');
