@@ -5,6 +5,23 @@ from src import db
 classes = Blueprint('classes', __name__)
 
 
+
+# Returns a list of all classes at a specific gym | Not Working
+@classes.route('/classes/<gymID>', methods=['GET'])
+def get_classes_by_gym(gymID):
+    cursor = db.get_db().cursor()
+    cursor.execute('select * from Fitness_Class where Gym_ID = {0}'.format(gymID))
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+
 # Returns a list of all gym classes
 @classes.route('/classes', methods=['GET'])
 def get_classes():
@@ -21,23 +38,7 @@ def get_classes():
     return the_response
 
 
-# Returns a list of all classes at a specific gym 
-@classes.route('/classes/<gymID>', methods=['GET'])
-def get_classes_by_gym(gymID):
-    cursor = db.get_db().cursor()
-    cursor.execute('select * from fitness_class where gym_id = {0}'.format(gymID))
-    row_headers = [x[0] for x in cursor.description]
-    json_data = []
-    theData = cursor.fetchall()
-    for row in theData:
-        json_data.append(dict(zip(row_headers, row)))
-    the_response = make_response(jsonify(json_data))
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
-
-
-# Allows to sign up for fitness class
+# Allows to sign up for fitness class | Not Working
 @classes.route('/classes/signup', methods=['POST'])
 def signup_for_class():
     cursor = db.get_db().cursor()
@@ -50,7 +51,7 @@ def signup_for_class():
     return the_response
 
 
-# Allows to cancel fitness class sign up
+# Allows to cancel fitness class sign up | Not Working
 @classes.route('/classes/cancel', methods=['POST'])
 def cancel_class_signup():
     cursor = db.get_db().cursor()
@@ -63,7 +64,7 @@ def cancel_class_signup():
     return the_response
 
 
-# Returns a list of all classes a member is signed up for
+# Returns a list of all classes a member is signed up for 
 @classes.route('/classes/member/<memberID>', methods=['GET'])
 def get_classes_by_member(memberID):
     cursor = db.get_db().cursor()

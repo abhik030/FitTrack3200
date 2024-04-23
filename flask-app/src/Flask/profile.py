@@ -16,6 +16,34 @@ def create_profile():
     the_response.mimetype = 'application/json'
     return the_response
 
+
+# Return specific profile details
+@profile.route('/profile/<profileID>', methods=['GET'])
+def get_profileDetails(profileID):
+    cursor = db.get_db().cursor()
+    cursor.execute('select * from Member_Profile where Member_ID = %s', (profileID,))
+    profile = cursor.fetchone()
+    if profile is None:
+        the_response = make_response(jsonify('Profile not found'))
+        the_response.status_code = 404
+        the_response.mimetype = 'application/json'
+        return the_response
+    else:
+        profile_details = {
+            'Member_ID': profile[0],
+            'Home_Gym_ID': profile[1],
+            'Fitness_Goal': profile[2],
+            'UserName': profile[3],
+            'Gender': profile[4],
+            'Achievements': profile[5],
+            'Preferences': profile[6],
+            'Membership_Start_Date': profile[7]
+        }
+        the_response = make_response(jsonify(profile_details))
+        the_response.status_code = 200
+        the_response.mimetype = 'application/json'
+        return the_response
+
 # Updating a member profile
 @profile.route('/profile/<profileID>', methods=['PUT'])
 def update_profile(profileID):
@@ -46,30 +74,3 @@ def delete_profile(profileID):
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
-
-# Return specific profile details
-@profile.route('/profile/<profileID>', methods=['GET'])
-def get_profileDetails(profileID):
-    cursor = db.get_db().cursor()
-    cursor.execute('select * from Member_Profile where Member_ID = %s', (profileID,))
-    profile = cursor.fetchone()
-    if profile is None:
-        the_response = make_response(jsonify('Profile not found'))
-        the_response.status_code = 404
-        the_response.mimetype = 'application/json'
-        return the_response
-    else:
-        profile_details = {
-            'Member_ID': profile[0],
-            'Home_Gym_ID': profile[1],
-            'Fitness_Goal': profile[2],
-            'UserName': profile[3],
-            'Gender': profile[4],
-            'Achievements': profile[5],
-            'Preferences': profile[6],
-            'Membership_Start_Date': profile[7]
-        }
-        the_response = make_response(jsonify(profile_details))
-        the_response.status_code = 200
-        the_response.mimetype = 'application/json'
-        return the_response

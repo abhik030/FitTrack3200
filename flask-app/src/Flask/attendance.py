@@ -2,7 +2,6 @@ from flask import Blueprint, request, jsonify, make_response
 import json
 from src import db
 
-
 attendance = Blueprint('attendance', __name__)
 
 
@@ -25,20 +24,20 @@ def get_attendance():
 @attendance.route('/attendance', methods=['POST'])
 def track_attendance():
     cursor = db.get_db().cursor()
-    cursor.execute('insert into Attendance (member_id, gym_id, checkin_time) values (%s, %s, %s)', 
-        (request.json['member_id'], request.json['gym_id'], request.json['checkin_time']))
+    cursor.execute('insert into Attendance (member_id, gym_id, date) values (%s, %s, %s)', 
+        (request.json['member_id'], request.json['gym_id'], request.json['date']))
     db.get_db().commit()
     the_response = make_response(jsonify('Attendance tracked successfully'))
     the_response.status_code = 201
     the_response.mimetype = 'application/json'
     return the_response
 
-# Updates gym attendance
-@attendance.route('/attendance/<attendanceID>', methods=['PUT'])
-def update_attendance(attendanceID):
+# Updates gym attendance | Not working
+@attendance.route('/attendance/<int:member_id>', methods=['PUT'])
+def update_attendance(member_id):
     cursor = db.get_db().cursor()
-    cursor.execute('update Attendance set member_id = %s, gym_id = %s, checkin_time = %s where id = %s', 
-        (request.json['member_id'], request.json['gym_id'], request.json['checkin_time'], attendanceID))
+    cursor.execute('update Attendance set Workout_Freq = %s where Member_ID = %s', 
+        (request.json['workout_freq'], member_id))
     db.get_db().commit()
     the_response = make_response(jsonify('Attendance updated successfully'))
     the_response.status_code = 200
