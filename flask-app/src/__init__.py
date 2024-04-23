@@ -3,6 +3,7 @@ from flaskext.mysql import MySQL
 
 db = MySQL()
 
+
 def create_app():
     app = Flask(__name__)
     
@@ -25,6 +26,7 @@ def create_app():
     from src.Flask.classes import classes
     from src.Flask.occupancy import occupancy
     from src.Flask.profile import profile
+
 
 
 

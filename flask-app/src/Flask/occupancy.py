@@ -1,7 +1,13 @@
 from flask import Blueprint, request, jsonify, make_response
+import flask.json
 import json
 from src import db
+from datetime import timedelta
 
+def serialize_timedelta(td):
+    if isinstance(td, timedelta):
+        return str(td)
+    return td
 
 occupancy = Blueprint('occupancy', __name__)
 
@@ -14,11 +20,12 @@ def get_occupancy():
     json_data = []
     theData = cursor.fetchall()
     for row in theData:
-        json_data.append(dict(zip(row_headers, row)))
+        json_data.append({header: serialize_timedelta(value) for header, value in zip(row_headers, row)})
     the_response = make_response(jsonify(json_data))
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
+
 
 # Returns a list of occupancy at a specific gym
 @occupancy.route('/occupancy/<gymID>', methods=['GET'])
@@ -29,9 +36,8 @@ def get_occupancy_by_gym(gymID):
     json_data = []
     theData = cursor.fetchall()
     for row in theData:
-        json_data.append(dict(zip(row_headers, row)))
+        json_data.append({header: serialize_timedelta(value) for header, value in zip(row_headers, row)})
     the_response = make_response(jsonify(json_data))
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
     return the_response
-
