@@ -1,6 +1,6 @@
 # DATABASE DESIGN PROJECT SPRING 2024
 
-# MySQL + Flask Boilerplate Project
+## MySQL + Flask Boilerplate Project
 
 This repo contains a boilerplate setup for spinning up 3 Docker containers: 
 1. A MySQL 8 container 
@@ -12,4 +12,4 @@ This repo contains a boilerplate setup for spinning up 3 Docker containers:
 2. Using **AppSmith** as our front end to display our mock data that we got from **Mockaroo**
 3. Implemented **RestAPI** routing using **Python Flask** | Tested using **Thunder Client**
 4. Created a database model and implementation from scratch using LucidCharts to map out our ER diagrams and database and converted it into a **MySQL** database
-5. We stored all our data and information in **Docker** containers in order to have a seamless flow between all ends.
+5. We stored all our data and information in **Docker** containers in order to have a seamless flow between all ends
