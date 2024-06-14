@@ -1,3 +1,5 @@
+# DATABASE DESIGN PROJECT SPRING 2024
+
 # MySQL + Flask Boilerplate Project
 
 This repo contains a boilerplate setup for spinning up 3 Docker containers: 
