@@ -1,4 +1,4 @@
-# DATABASE DESIGN PROJECT
+# FitTrack - Fitness Membership Management System
 
 ## MySQL + Flask Boilerplate Project
 
